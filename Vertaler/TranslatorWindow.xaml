@@ -3,10 +3,50 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Vertaler"
-        mc:Ignorable="d"
-        Title="TranslatorWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True"
+        Background="Transparent">
+    <md:Card Margin="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+             Background="{DynamicResource MaterialDesignPaper}">
+        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!--TOP WINDOW ROW-->
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                       Text="Vertaler" Margin="15"
+                       Style="{StaticResource MaterialDesignTitleTextBlock}"
+                       Foreground="{StaticResource MaterialDesignGray}"/>
+
+            <Button Grid.Row="0" Grid.Column="1"
+                    HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Content="{md:PackIcon Kind=GithubCircle}"
+                    Style="{StaticResource LightButton}"
+                    Foreground="{StaticResource MaterialDesignGray}"
+                    Click="GitHubClick" />
+            
+            <Button Grid.Row="0" Grid.Column="2"
+                    HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Content="{md:PackIcon Kind=WindowMinimize}"
+                    Style="{StaticResource LightButton}"
+                    Foreground="{StaticResource MaterialDesignGray}"
+                    Click="MinimizeClick" />
+            
+            <!--CENTER TRANSLATOR SERVICE-->
+        </Grid>
+    </md:Card>
 </Window>

@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Vertaler
 {
@@ -22,6 +11,17 @@ namespace Vertaler
         public TranslatorWindow()
         {
             InitializeComponent();
+        }
+
+        private void GitHubClick(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://github.com/mrousavy/Vertaler");
+        }
+
+        private void MinimizeClick(object sender, RoutedEventArgs e)
+        {
+            // TODO: FADE OUT/OTHER ANIMATION
+            WindowState = WindowState.Minimized;
         }
     }
 }

@@ -16,7 +16,7 @@
             <SolidColorBrush x:Key="MaterialDesignGray" Color="#7f7f7f" />
             <SolidColorBrush x:Key="MaterialDesignLightGray" Color="#dddddd" />
 
-            <Style TargetType="Button" x:Key="TextButton" BasedOn="{StaticResource MaterialDesignFlatButton}">
+            <Style TargetType="Button" x:Key="LightButton" BasedOn="{StaticResource MaterialDesignFlatButton}">
                 <Setter Property="FontSize" Value="12" />
                 <Setter Property="Height" Value="25" />
                 <Setter Property="Width" Value="45" />
