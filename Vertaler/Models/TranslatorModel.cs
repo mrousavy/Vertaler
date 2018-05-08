@@ -1,24 +1,42 @@
 ﻿using Google.Cloud.Translation.V2;
+using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Vertaler.Models
 {
     public class TranslatorModel
     {
-        public async Task<IEnumerable<Language>> GetAllLanguagesAsync()
+        public IEnumerable<Language> GetAllLanguages()
         {
-            return null;
+            var languages = new List<Language>();
+            var members = typeof(LanguageCodes).GetMembers();
+            foreach (var member in members)
+            {
+                if (member is FieldInfo fieldInfo)
+                {
+                    var value = fieldInfo.GetValue(null);
+                    languages.Add(new Language(member.Name, value as string));
+                }
+            }
+
+            return languages;
         }
 
-        public async Task<string> TranslateAsync(string text, Language sourceLanguage)
+        public async Task<IEnumerable<Language>> GetAllLanguagesAsync()
         {
-            return null;
+            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", "api.json");
+            var client = await TranslationClient.CreateAsync();
+            return await client.ListLanguagesAsync();
         }
 
         public async Task<string> TranslateAsync(string text, Language sourceLanguage, Language targetLanguage)
         {
-            return null;
+            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", "api.json");
+            var client = await TranslationClient.CreateAsync();
+            var response = await client.TranslateTextAsync(text, targetLanguage.Code, sourceLanguage.Code);
+            return response.TranslatedText;
         }
     }
 }

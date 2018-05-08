@@ -1,12 +1,8 @@
 ﻿<Window x:Class="Vertaler.Views.TranslatorWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:vms="clr-namespace:Vertaler.ViewModels"
-        xmlns:system="clr-namespace:System;assembly=mscorlib"
-        xmlns:impl="clr-namespace:Vertaler.Implementation"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -19,7 +15,7 @@
         Left="{Binding ScreenWidth, Converter={StaticResource Add},
                ConverterParameter={StaticResource TranslatorWidthNegative}}"
         Top="{Binding ScreenHeight}"
-        ShowInTaskbar="True" Name="Window">
+        ShowInTaskbar="False" Name="Window">
     <!--DATA CONTEXT-->
     <Window.DataContext>
         <vms:TranslatorViewModel />
@@ -38,6 +34,8 @@
                     <PowerEase Power="7"/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="Window" Storyboard.TargetProperty="Opacity"
+                             Duration="0:0:0.3" From="0" To="1"/>
         </Storyboard>
 
         <!--CLOSE ANIMATION-->
@@ -52,6 +50,8 @@
                     <PowerEase Power="7"/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="Window" Storyboard.TargetProperty="Opacity"
+                             Duration="0:0:0.3" From="1" To="0"/>
         </Storyboard>
     </Window.Resources>
 
@@ -60,9 +60,9 @@
         <EventTrigger RoutedEvent="Window.Loaded">
             <BeginStoryboard Storyboard="{StaticResource OpenStoryboard}"/>
         </EventTrigger>
-        <EventTrigger RoutedEvent="Window.LostFocus">
+        <!--<EventTrigger RoutedEvent="Window.LostFocus">
             <BeginStoryboard Storyboard="{StaticResource CloseStoryboard}"/>
-        </EventTrigger>
+        </EventTrigger>-->
     </Window.Triggers>
 
     <!--CONTENT-->
@@ -71,41 +71,92 @@
         <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
             <!--TOP WINDOW ROW-->
-            <TextBlock Grid.Row="0" Grid.Column="0"
-                       Text="Vertaler" Margin="15"
-                       Style="{StaticResource MaterialDesignTitleTextBlock}"
-                       Foreground="{StaticResource MaterialDesignGray}"/>
+            <StackPanel Grid.Row="0" Grid.Column="0"
+                        Orientation="Horizontal" Margin="15 15 0 5">
+                <md:PackIcon Kind="GoogleTranslate" Margin="5"
+                             VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                             Foreground="{StaticResource MaterialDesignGray}"/>
 
-            <Button Grid.Row="0" Grid.Column="1"
-                    HorizontalAlignment="Right" VerticalAlignment="Top"
-                    Content="{md:PackIcon Kind=GithubCircle}"
-                    Style="{StaticResource LightButton}"
-                    Foreground="{StaticResource MaterialDesignGray}"
-                    Command="{Binding GitHubCommand}" />
+                <TextBlock Text="Vertaler" VerticalAlignment="Center"
+                           Style="{StaticResource MaterialDesignTitleTextBlock}"
+                           Foreground="{StaticResource MaterialDesignGray}"/>
+            </StackPanel>
 
-            <Button Grid.Row="0" Grid.Column="2"
-                    HorizontalAlignment="Right" VerticalAlignment="Top"
-                    Content="{md:PackIcon Kind=WindowMinimize}"
-                    Style="{StaticResource LightButton}"
-                    Foreground="{StaticResource MaterialDesignGray}">
-                <Button.Triggers>
-                    <EventTrigger RoutedEvent="Button.Click">
-                        <BeginStoryboard Storyboard="{StaticResource CloseStoryboard}"/>
-                    </EventTrigger>
-                </Button.Triggers>
-            </Button>
+            <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <Button HorizontalAlignment="Right" VerticalAlignment="Top"
+                        Content="{md:PackIcon Kind=GithubCircle}"
+                        Style="{StaticResource LightButton}"
+                        Foreground="{StaticResource MaterialDesignGray}"
+                        Command="{Binding GitHubCommand}"
+                        Focusable="False" />
 
-            <!--CENTER TRANSLATOR SERVICE-->
+                <Button HorizontalAlignment="Right" VerticalAlignment="Top"
+                        Content="{md:PackIcon Kind=WindowMinimize}"
+                        Style="{StaticResource LightButton}"
+                        Foreground="{StaticResource MaterialDesignGray}"
+                        Focusable="False" >
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <BeginStoryboard Storyboard="{StaticResource CloseStoryboard}"/>
+                        </EventTrigger>
+                    </Button.Triggers>
+                </Button>
+            </StackPanel>
+
+            <!--LANGUAGES-->
+            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <ComboBox Grid.Column="0" Margin="15 0 15 0"
+                          ItemsSource="{Binding Languages}"
+                          DisplayMemberPath="Name"
+                          SelectedItem="{Binding SourceLanguage}"
+                          SelectedValuePath="Name" />
+
+                <Button Grid.Column="1" Content="{md:PackIcon Kind=SwapHorizontal}"
+                        Style="{StaticResource LightButton}" Width="40"
+                        Foreground="{StaticResource MaterialDesignGray}"
+                        Command="{Binding SwitchLanguagesCommand}" />
+
+                <ComboBox Grid.Column="2" Margin="15 0 15 0"
+                          ItemsSource="{Binding Languages}"
+                          DisplayMemberPath="Name"
+                          SelectedItem="{Binding TargetLanguage}"
+                          SelectedValuePath="Name" />
+            </Grid>
+
+            <!--TEXT BOXES-->
+            <TextBox Grid.Row="2" Grid.Column="0" Margin="15"
+                     Style="{StaticResource MaterialDesignTextAreaTextBox}"
+                     Text="{Binding SourceText}" MaxLength="150"
+                     md:HintAssist.Hint="{md:PackIcon Kind=Alphabetical}"
+                     AcceptsReturn="True" SpellCheck.IsEnabled="True"
+                     VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" />
+
+            <TextBox Grid.Row="2" Grid.Column="2" Margin="15"
+                     Style="{StaticResource MaterialDesignTextAreaTextBox}"
+                     Text="{Binding TargetText}" MaxLength="150"
+                     md:HintAssist.Hint="{md:PackIcon Kind=Translate}" 
+                     VerticalScrollBarVisibility="Auto"
+                     IsReadOnly="True" TextWrapping="Wrap" />
         </Grid>
     </md:Card>
 </Window>

@@ -32,9 +32,9 @@
             <!--STATIC DEFINES-->
             <impl:AdditionConverter x:Key="Add"/>
             <system:Double x:Key="TranslatorWidth">400</system:Double>
-            <system:Double x:Key="TranslatorHeight">300</system:Double>
+            <system:Double x:Key="TranslatorHeight">250</system:Double>
             <system:Double x:Key="TranslatorWidthNegative">-400</system:Double>
-            <system:Double x:Key="TranslatorHeightNegative">-300</system:Double>
+            <system:Double x:Key="TranslatorHeightNegative">-250</system:Double>
 
             <!--TRAY ICON-->
             <vms:TrayIconViewModel x:Key="TrayIconViewModel"/>
