@@ -15,23 +15,25 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True"
         Background="Transparent" WindowStartupLocation="Manual"
-        Height="300" Width="400" Left="400"
+        Height="{StaticResource TranslatorHeight}" Width="{StaticResource TranslatorWidth}"
+        Left="{Binding ScreenWidth, Converter={StaticResource Add},
+               ConverterParameter={StaticResource TranslatorWidthNegative}}"
         Top="{Binding ScreenHeight}"
-        ShowInTaskbar="False" Name="Window">
+        ShowInTaskbar="True" Name="Window">
+    <!--DATA CONTEXT-->
     <Window.DataContext>
         <vms:TranslatorViewModel />
     </Window.DataContext>
 
+    <!--WINDOW RESOURCES-->
     <Window.Resources>
-        <impl:AdditionConverter x:Key="AdditionConverter"/>
-
         <!--OPEN ANIMATION-->
         <Storyboard x:Key="OpenStoryboard">
             <DoubleAnimation Storyboard.TargetName="Window" Name="SlideUpAnimation"
                              Storyboard.TargetProperty="Top" Duration="0:0:0.5"
                              From="{Binding ScreenHeight}"
-                             To="{Binding ScreenHeight, Converter={StaticResource AdditionConverter},
-                                  ConverterParameter=-400}">
+                             To="{Binding ScreenHeight, Converter={StaticResource Add},
+                                  ConverterParameter={StaticResource TranslatorHeightNegative}}">
                 <DoubleAnimation.EasingFunction>
                     <PowerEase Power="7"/>
                 </DoubleAnimation.EasingFunction>
@@ -42,8 +44,8 @@
         <Storyboard x:Key="CloseStoryboard">
             <DoubleAnimation Storyboard.TargetName="Window" Name="SlideDownAnimation"
                              Storyboard.TargetProperty="Top" Duration="0:0:0.5"
-                             From="{Binding ScreenHeight, Converter={StaticResource AdditionConverter},
-                                    ConverterParameter=-400}"
+                             From="{Binding ScreenHeight, Converter={StaticResource Add},
+                                    ConverterParameter={StaticResource TranslatorHeightNegative}}"
                              To="{Binding ScreenHeight}"
                              Completed="CloseAnimationCompleted">
                 <DoubleAnimation.EasingFunction>
@@ -51,10 +53,9 @@
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
-        
-        <!--ADD CONVERTER-->
     </Window.Resources>
 
+    <!--EVENT TRIGGERS FOR ANIMATIONS-->
     <Window.Triggers>
         <EventTrigger RoutedEvent="Window.Loaded">
             <BeginStoryboard Storyboard="{StaticResource OpenStoryboard}"/>
@@ -64,6 +65,7 @@
         </EventTrigger>
     </Window.Triggers>
 
+    <!--CONTENT-->
     <md:Card Margin="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
              Background="{DynamicResource MaterialDesignPaper}">
         <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">

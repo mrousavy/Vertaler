@@ -6,6 +6,8 @@
              xmlns:models="clr-namespace:Vertaler.Models"
              xmlns:vms="clr-namespace:Vertaler.ViewModels"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:impl="clr-namespace:Vertaler.Implementation"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              Startup="AppStartup"
              ShutdownMode="OnExplicitShutdown">
     <Application.Resources>
@@ -27,6 +29,12 @@
                 <Setter Property="Padding" Value="-15" />
             </Style>
 
+            <!--STATIC DEFINES-->
+            <impl:AdditionConverter x:Key="Add"/>
+            <system:Double x:Key="TranslatorWidth">400</system:Double>
+            <system:Double x:Key="TranslatorHeight">300</system:Double>
+            <system:Double x:Key="TranslatorWidthNegative">-400</system:Double>
+            <system:Double x:Key="TranslatorHeightNegative">-300</system:Double>
 
             <!--TRAY ICON-->
             <vms:TrayIconViewModel x:Key="TrayIconViewModel"/>
