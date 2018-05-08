@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:Vertaler"
              xmlns:tb="http://www.hardcodet.net/taskbar"
              xmlns:models="clr-namespace:Vertaler.Models"
+             xmlns:vms="clr-namespace:Vertaler.ViewModels"
              Startup="AppStartup"
              ShutdownMode="OnExplicitShutdown">
     <Application.Resources>
@@ -27,7 +28,10 @@
 
 
             <!--TRAY ICON-->
+            <vms:TrayIconViewModel x:Key="TrayIconViewModel"/>
             <tb:TaskbarIcon x:Key="TrayIcon"
+                            DataContext="{StaticResource TrayIconViewModel}"
+                            LeftClickCommand="{Binding LeftClickCommand}"
                             IconSource="Resources/icon.ico"
                             ToolTipText="Tray Icon" />
         </ResourceDictionary>
