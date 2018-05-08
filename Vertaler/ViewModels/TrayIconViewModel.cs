@@ -1,7 +1,7 @@
-﻿using System.Diagnostics;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using Vertaler.Implementation;
+using Vertaler.Views;
 
 namespace Vertaler.ViewModels
 {
@@ -40,12 +40,16 @@ namespace Vertaler.ViewModels
 
         private void LeftClickAction(object o)
         {
-            Process.Start("https://github.com");
+            var translator = new TranslatorWindow();
+            translator.Show();
+            translator.Activate();
         }
 
         private void SettingsAction(object o)
         {
-            // TODO: Show settings
+            var settings = new SettingsWindow();
+            settings.Show();
+            settings.Activate();
         }
 
         private void CloseAction(object o)

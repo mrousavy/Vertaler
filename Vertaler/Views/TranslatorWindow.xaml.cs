@@ -1,7 +1,6 @@
-﻿using System.Diagnostics;
-using System.Windows;
+﻿using System.Windows;
 
-namespace Vertaler
+namespace Vertaler.Views
 {
     /// <summary>
     /// Interaction logic for TranslatorWindow.xaml
@@ -11,17 +10,18 @@ namespace Vertaler
         public TranslatorWindow()
         {
             InitializeComponent();
-        }
+            double screenWidth = SystemParameters.PrimaryScreenWidth;
+            double screenHeight = SystemParameters.PrimaryScreenHeight;
 
-        private void GitHubClick(object sender, RoutedEventArgs e)
-        {
-            Process.Start("https://github.com/mrousavy/Vertaler");
+            Left = screenWidth - Width;
+            Top = screenHeight - Height;
+            // TODO: OPEN ANIMATION
         }
 
         private void MinimizeClick(object sender, RoutedEventArgs e)
         {
-            // TODO: FADE OUT/OTHER ANIMATION
-            WindowState = WindowState.Minimized;
+            // TODO: CLOSE ANIMATION
+            Close();
         }
     }
 }

@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Vertaler.Views
 {
     /// <summary>
-    /// Interaction logic for TrayWindow.xaml
+    /// Interaction logic for SettingsWindow.xaml
     /// </summary>
-    public partial class TrayWindow : Window
+    public partial class SettingsWindow : Window
     {
-        public TrayWindow()
+        public SettingsWindow()
         {
             InitializeComponent();
         }
