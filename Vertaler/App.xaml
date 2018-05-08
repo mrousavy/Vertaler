@@ -5,6 +5,23 @@
              StartupUri="MainWindow.xaml"
              ShutdownMode="OnExplicitShutdown">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.LightBlue.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <SolidColorBrush x:Key="MaterialDesignGray" Color="#7f7f7f" />
+            <SolidColorBrush x:Key="MaterialDesignLightGray" Color="#dddddd" />
+
+            <Style TargetType="Button" x:Key="TextButton" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Height" Value="25" />
+                <Setter Property="Width" Value="45" />
+                <Setter Property="Padding" Value="-15" />
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
