@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 namespace Vertaler.Views
 {
@@ -10,17 +11,10 @@ namespace Vertaler.Views
         public TranslatorWindow()
         {
             InitializeComponent();
-            double screenWidth = SystemParameters.PrimaryScreenWidth;
-            double screenHeight = SystemParameters.PrimaryScreenHeight;
-
-            Left = screenWidth - Width;
-            Top = screenHeight - Height;
-            // TODO: OPEN ANIMATION
         }
 
-        private void MinimizeClick(object sender, RoutedEventArgs e)
+        private void CloseAnimationCompleted(object sender, EventArgs e)
         {
-            // TODO: CLOSE ANIMATION
             Close();
         }
     }

@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:vms="clr-namespace:Vertaler.ViewModels"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:impl="clr-namespace:Vertaler.Implementation"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -13,10 +15,54 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True"
         Background="Transparent" WindowStartupLocation="Manual"
-        Height="300" Width="400" ShowInTaskbar="False">
+        Height="300" Width="400" Left="400"
+        Top="{Binding ScreenHeight}"
+        ShowInTaskbar="False" Name="Window">
     <Window.DataContext>
         <vms:TranslatorViewModel />
     </Window.DataContext>
+
+    <Window.Resources>
+        <impl:AdditionConverter x:Key="AdditionConverter"/>
+
+        <!--OPEN ANIMATION-->
+        <Storyboard x:Key="OpenStoryboard">
+            <DoubleAnimation Storyboard.TargetName="Window" Name="SlideUpAnimation"
+                             Storyboard.TargetProperty="Top" Duration="0:0:0.5"
+                             From="{Binding ScreenHeight}"
+                             To="{Binding ScreenHeight, Converter={StaticResource AdditionConverter},
+                                  ConverterParameter=-400}">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="7"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <!--CLOSE ANIMATION-->
+        <Storyboard x:Key="CloseStoryboard">
+            <DoubleAnimation Storyboard.TargetName="Window" Name="SlideDownAnimation"
+                             Storyboard.TargetProperty="Top" Duration="0:0:0.5"
+                             From="{Binding ScreenHeight, Converter={StaticResource AdditionConverter},
+                                    ConverterParameter=-400}"
+                             To="{Binding ScreenHeight}"
+                             Completed="CloseAnimationCompleted">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="7"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        
+        <!--ADD CONVERTER-->
+    </Window.Resources>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource OpenStoryboard}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Window.LostFocus">
+            <BeginStoryboard Storyboard="{StaticResource CloseStoryboard}"/>
+        </EventTrigger>
+    </Window.Triggers>
 
     <md:Card Margin="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
              Background="{DynamicResource MaterialDesignPaper}">
@@ -44,14 +90,19 @@
                     Style="{StaticResource LightButton}"
                     Foreground="{StaticResource MaterialDesignGray}"
                     Command="{Binding GitHubCommand}" />
-            
+
             <Button Grid.Row="0" Grid.Column="2"
                     HorizontalAlignment="Right" VerticalAlignment="Top"
                     Content="{md:PackIcon Kind=WindowMinimize}"
                     Style="{StaticResource LightButton}"
-                    Foreground="{StaticResource MaterialDesignGray}"
-                    Click="MinimizeClick" />
-            
+                    Foreground="{StaticResource MaterialDesignGray}">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard Storyboard="{StaticResource CloseStoryboard}"/>
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+
             <!--CENTER TRANSLATOR SERVICE-->
         </Grid>
     </md:Card>
