@@ -115,6 +115,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Extensions.cs" />
+    <Compile Include="Implementation\AdditionConverter.cs" />
     <Compile Include="Implementation\RelayCommand.cs" />
     <Compile Include="Implementation\ViewModelBase.cs" />
     <Compile Include="Models\SettingsModel.cs" />
