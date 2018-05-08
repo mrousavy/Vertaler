@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Hardcodet.Wpf.TaskbarNotification;
+using System;
 using System.Windows;
 
 namespace Vertaler
@@ -13,5 +9,11 @@ namespace Vertaler
     /// </summary>
     public partial class App : Application
     {
+        private void AppStartup(object sender, StartupEventArgs e)
+        {
+            var trayIcon = FindResource("TrayIcon") as TaskbarIcon;
+
+            Console.WriteLine("App started!");
+        }
     }
 }

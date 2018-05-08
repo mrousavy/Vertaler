@@ -11,7 +11,8 @@
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True"
-        Background="Transparent">
+        Background="Transparent"
+        Height="200" Width="300" ShowInTaskbar="False">
     <md:Card Margin="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
              Background="{DynamicResource MaterialDesignPaper}">
         <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
