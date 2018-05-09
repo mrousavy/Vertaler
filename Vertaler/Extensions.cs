@@ -7,22 +7,14 @@ namespace Vertaler
 {
     public static class Extensions
     {
-
-        public static bool Set<T>(this PropertyChangedEventHandler handler, ref T field, T value, Expression<Func<T>> memberExpression)
+        public static bool Set<T>(this PropertyChangedEventHandler handler, ref T field, T value,
+            Expression<Func<T>> memberExpression)
         {
-            if (memberExpression == null)
-            {
-                throw new ArgumentNullException(nameof(memberExpression));
-            }
+            if (memberExpression == null) throw new ArgumentNullException(nameof(memberExpression));
 
             if (!(memberExpression.Body is MemberExpression body))
-            {
                 throw new ArgumentException("Lambda must return a property.");
-            }
-            if (EqualityComparer<T>.Default.Equals(field, value))
-            {
-                return false;
-            }
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
 
             if (body.Expression is ConstantExpression vmExpression)
             {

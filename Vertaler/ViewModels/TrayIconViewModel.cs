@@ -7,30 +7,6 @@ namespace Vertaler.ViewModels
 {
     public class TrayIconViewModel : ViewModelBase
     {
-        #region Properties
-        private ICommand _leftClickCommand;
-        private ICommand _settingsCommand;
-        private ICommand _closeCommand;
-
-        public ICommand LeftClickCommand
-        {
-            get => _leftClickCommand;
-            set => Set(ref _leftClickCommand, value);
-        }
-
-        public ICommand SettingsCommand
-        {
-            get => _settingsCommand;
-            set => Set(ref _settingsCommand, value);
-        }
-
-        public ICommand CloseCommand
-        {
-            get => _closeCommand;
-            set => Set(ref _closeCommand, value);
-        }
-        #endregion
-
         public TrayIconViewModel()
         {
             LeftClickCommand = new RelayCommand(LeftClickAction);
@@ -56,5 +32,31 @@ namespace Vertaler.ViewModels
         {
             Application.Current.Shutdown();
         }
+
+        #region Properties
+
+        private ICommand _leftClickCommand;
+        private ICommand _settingsCommand;
+        private ICommand _closeCommand;
+
+        public ICommand LeftClickCommand
+        {
+            get => _leftClickCommand;
+            set => Set(ref _leftClickCommand, value);
+        }
+
+        public ICommand SettingsCommand
+        {
+            get => _settingsCommand;
+            set => Set(ref _settingsCommand, value);
+        }
+
+        public ICommand CloseCommand
+        {
+            get => _closeCommand;
+            set => Set(ref _closeCommand, value);
+        }
+
+        #endregion
     }
 }

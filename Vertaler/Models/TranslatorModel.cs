@@ -1,8 +1,8 @@
-﻿using Google.Cloud.Translation.V2;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
+using Google.Cloud.Translation.V2;
 
 namespace Vertaler.Models
 {
@@ -13,13 +13,11 @@ namespace Vertaler.Models
             var languages = new List<Language>();
             var members = typeof(LanguageCodes).GetMembers();
             foreach (var member in members)
-            {
                 if (member is FieldInfo fieldInfo)
                 {
                     var value = fieldInfo.GetValue(null);
                     languages.Add(new Language(member.Name, value as string));
                 }
-            }
 
             return languages;
         }

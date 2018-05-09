@@ -6,7 +6,8 @@ namespace Vertaler.Implementation
 {
     /// <inheritdoc />
     /// <summary>
-    ///     The observable base class for every view model providing a rich <see cref="T:System.ComponentModel.INotifyPropertyChanged" /> wrapper
+    ///     The observable base class for every view model providing a rich
+    ///     <see cref="T:System.ComponentModel.INotifyPropertyChanged" /> wrapper
     /// </summary>
     public abstract class ViewModelBase : INotifyPropertyChanged
     {
@@ -17,7 +18,7 @@ namespace Vertaler.Implementation
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        ///     Raise the <see cref="PropertyChanged"/> event
+        ///     Raise the <see cref="PropertyChanged" /> event
         /// </summary>
         /// <param name="propertyName">The caller member name of the property (auto-set)</param>
         [NotifyPropertyChangedInvocator]
@@ -27,7 +28,7 @@ namespace Vertaler.Implementation
         }
 
         /// <summary>
-        ///     Set a property and raise the <see cref="PropertyChanged"/> event
+        ///     Set a property and raise the <see cref="PropertyChanged" /> event
         /// </summary>
         /// <typeparam name="T">The type of the Property</typeparam>
         /// <param name="field">A reference to the backing field from the property</param>

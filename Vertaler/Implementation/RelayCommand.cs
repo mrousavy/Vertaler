@@ -10,14 +10,12 @@ namespace Vertaler.Implementation
     /// <typeparam name="T">The type of the parameter</typeparam>
     public class RelayCommand<T> : ICommand
     {
-        private readonly Action<T> _execute;
         private readonly Func<T, bool> _canExecute;
-
-        public event EventHandler CanExecuteChanged;
+        private readonly Action<T> _execute;
 
         /// <summary>
-        ///     Initialize a new instance of the <see cref="RelayCommand{T}"/>, a <see cref="ICommand"/> implementation,
-        ///     where <see cref="CanExecute"/> is always true
+        ///     Initialize a new instance of the <see cref="RelayCommand{T}" />, a <see cref="ICommand" /> implementation,
+        ///     where <see cref="CanExecute" /> is always true
         /// </summary>
         /// <param name="execute">The callback to execute on command execution</param>
         public RelayCommand(Action<T> execute)
@@ -27,7 +25,7 @@ namespace Vertaler.Implementation
         }
 
         /// <summary>
-        ///     Initialize a new instance of the <see cref="RelayCommand{T}"/>, a <see cref="ICommand"/> implementation
+        ///     Initialize a new instance of the <see cref="RelayCommand{T}" />, a <see cref="ICommand" /> implementation
         /// </summary>
         /// <param name="execute">The callback to execute on command execution</param>
         /// <param name="canExecute">The callback to check if this command can execute</param>
@@ -36,6 +34,8 @@ namespace Vertaler.Implementation
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute ?? throw new ArgumentNullException(nameof(canExecute));
         }
+
+        public event EventHandler CanExecuteChanged;
 
         /// <inheritdoc />
         /// <summary>
@@ -62,11 +62,10 @@ namespace Vertaler.Implementation
         }
 
         /// <summary>
-        ///     Raise the <see cref="CanExecuteChanged"/> event
+        ///     Raise the <see cref="CanExecuteChanged" /> event
         /// </summary>
         public void RaiseCanExecuteChanged() => CanExecuteChanged?.Invoke(this, new EventArgs());
     }
-
 
 
     /// <inheritdoc />
@@ -75,14 +74,12 @@ namespace Vertaler.Implementation
     /// </summary>
     public class RelayCommand : ICommand
     {
-        private readonly Action<object> _execute;
         private readonly Func<object, bool> _canExecute;
-
-        public event EventHandler CanExecuteChanged;
+        private readonly Action<object> _execute;
 
         /// <summary>
-        ///     Initialize a new instance of the <see cref="RelayCommand"/>, a <see cref="ICommand"/> implementation,
-        ///     where <see cref="CanExecute"/> is always true
+        ///     Initialize a new instance of the <see cref="RelayCommand" />, a <see cref="ICommand" /> implementation,
+        ///     where <see cref="CanExecute" /> is always true
         /// </summary>
         /// <param name="execute">The callback to execute on command execution</param>
         public RelayCommand(Action<object> execute)
@@ -92,7 +89,7 @@ namespace Vertaler.Implementation
         }
 
         /// <summary>
-        ///     Initialize a new instance of the <see cref="RelayCommand"/>, a <see cref="ICommand"/> implementation
+        ///     Initialize a new instance of the <see cref="RelayCommand" />, a <see cref="ICommand" /> implementation
         /// </summary>
         /// <param name="execute">The callback to execute on command execution</param>
         /// <param name="canExecute">The callback to check if this command can execute</param>
@@ -101,6 +98,8 @@ namespace Vertaler.Implementation
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute ?? throw new ArgumentNullException(nameof(canExecute));
         }
+
+        public event EventHandler CanExecuteChanged;
 
         /// <inheritdoc />
         /// <summary>
@@ -118,7 +117,7 @@ namespace Vertaler.Implementation
         public void Execute(object parameter) => _execute?.Invoke(parameter);
 
         /// <summary>
-        ///     Raise the <see cref="CanExecuteChanged"/> event
+        ///     Raise the <see cref="CanExecuteChanged" /> event
         /// </summary>
         public void RaiseCanExecuteChanged() => CanExecuteChanged?.Invoke(this, new EventArgs());
     }

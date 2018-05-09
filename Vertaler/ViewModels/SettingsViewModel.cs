@@ -3,6 +3,5 @@
 namespace Vertaler.ViewModels
 {
     public class SettingsViewModel : ViewModelBase
-    {
-    }
+    { }
 }

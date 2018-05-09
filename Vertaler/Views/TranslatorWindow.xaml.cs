@@ -4,7 +4,7 @@ using System.Windows;
 namespace Vertaler.Views
 {
     /// <summary>
-    /// Interaction logic for TranslatorWindow.xaml
+    ///     Interaction logic for TranslatorWindow.xaml
     /// </summary>
     public partial class TranslatorWindow : Window
     {
