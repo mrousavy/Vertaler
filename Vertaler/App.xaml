@@ -47,6 +47,7 @@
                 DataContext="{StaticResource TrayIconViewModel}"
                 IconSource="Resources/icon.ico"
                 LeftClickCommand="{Binding LeftClickCommand}"
+                NoLeftClickDelay="True"
                 ToolTip="vərˈtalər">
                 <!--<tb:TaskbarIcon.TrayToolTip>
                     <md:Card>

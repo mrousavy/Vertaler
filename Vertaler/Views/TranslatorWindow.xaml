@@ -19,6 +19,7 @@
     TextOptions.TextFormattingMode="Ideal"
     TextOptions.TextRenderingMode="Auto"
     Top="{Binding ScreenHeight}"
+    Topmost="True"
     WindowStartupLocation="Manual"
     WindowStyle="None">
     <!--  DATA CONTEXT  -->
@@ -81,6 +82,10 @@
             <BeginStoryboard Storyboard="{StaticResource CloseStoryboard}"/>
         </EventTrigger>-->
     </Window.Triggers>
+
+    <Window.InputBindings>
+        <KeyBinding Key="Tab" Command="{Binding SwitchLanguagesCommand}" />
+    </Window.InputBindings>
 
     <!--  CONTENT  -->
     <md:Card
@@ -177,7 +182,8 @@
                     Command="{Binding SwitchLanguagesCommand}"
                     Content="{md:PackIcon Kind=SwapHorizontal}"
                     Foreground="{StaticResource MaterialDesignGray}"
-                    Style="{StaticResource LightButton}" />
+                    Style="{StaticResource LightButton}"
+                    ToolTip="Switch Languages (Tab)" />
 
                 <ComboBox
                     Grid.Column="2"
@@ -198,7 +204,7 @@
                 MaxLength="150"
                 SpellCheck.IsEnabled="True"
                 Style="{StaticResource MaterialDesignTextAreaTextBox}"
-                Text="{Binding SourceText}"
+                Text="{Binding SourceText, UpdateSourceTrigger=PropertyChanged}"
                 TextWrapping="Wrap"
                 VerticalScrollBarVisibility="Auto" />
 
